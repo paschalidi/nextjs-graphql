@@ -21,6 +21,13 @@
     "noImplicitReturns": true,
     "target": "esnext"
   },
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    "out",
+    "next.config.js",
+    "apollo-env.d.ts"
+  ],
   "include": ["**/*.ts", "**/*.tsx"]
 }
