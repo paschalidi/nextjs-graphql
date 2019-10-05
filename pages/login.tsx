@@ -16,14 +16,14 @@ export default withApollo(() => {
             validateOnBlur={false}
             onSubmit={async (data, { setErrors }) => {
               setDisabled(true);
-              const response = await login({ variables: data });
-              console.log(response);
-              if (response && response.data && !response.data.login) {
-                setErrors({ email: "invalid credentials" });
-                setDisabled(false);
 
+              const response = await login({ variables: data });
+              if (response && response.data && !response.data.login) {
+                setDisabled(false);
+                setErrors({ email: "Invalid credentials" });
                 return;
               }
+
               Router.push("/");
             }}
             initialValues={{

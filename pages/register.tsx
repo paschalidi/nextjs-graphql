@@ -6,7 +6,16 @@ import { RegisterComponent } from "../generated/apollocComponents";
 import { withApollo } from "../lib/apollo";
 import Router from "next/router";
 
-export default withApollo(() => {
+interface ValidationErrors {
+  constraints: [];
+  property: string;
+}
+
+interface Errors {
+  [key: string]: string;
+}
+
+const Register = () => {
   const [isDisabled, setDisabled] = useState(false);
   return (
     <Layout title="Register Page">
@@ -19,8 +28,7 @@ export default withApollo(() => {
                 setDisabled(true);
                 await register({ variables: { data } });
               } catch (err) {
-                const errors: { [key: string]: string } = {};
-                console.log(Object.keys(errors));
+                const errors: Errors = {};
                 if (
                   err.graphQLErrors[0] &&
                   err.graphQLErrors[0].extensions &&
@@ -28,15 +36,25 @@ export default withApollo(() => {
                   err.graphQLErrors[0].extensions.exception.validationErrors
                 ) {
                   err.graphQLErrors[0].extensions.exception.validationErrors.map(
-                    ({ constraints, property }: any) => {
+                    ({ constraints, property }: ValidationErrors) => {
                       Object.values(constraints).forEach(
-                        (message: any): void => {
+                        (message: string): void => {
                           errors[property] = message;
                         }
                       );
                     }
                   );
                   setErrors(errors);
+                }
+                if (
+                  err.graphQLErrors[0] &&
+                  err.graphQLErrors[0].extensions &&
+                  err.graphQLErrors[0].extensions.exception &&
+                  err.graphQLErrors[0].extensions.exception.message.includes(
+                    "duplicate key value"
+                  )
+                ) {
+                  setErrors({ password: "Something goes wrong" });
                 }
               }
             }}
@@ -81,4 +99,6 @@ export default withApollo(() => {
       </RegisterComponent>
     </Layout>
   );
-});
+};
+
+export default withApollo(Register);

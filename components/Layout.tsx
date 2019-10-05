@@ -31,14 +31,14 @@ const Layout: React.FunctionComponent<Props> = ({
         </Link>{" "}
         |{" "}
         <Link href="/logout">
-          <a>logout</a>
-        </Link>{" "}
+          <a>Logout</a>
+        </Link>
       </nav>
     </header>
     {children}
     <footer>
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>Here to stay (Footer)</span>
     </footer>
   </div>
 );

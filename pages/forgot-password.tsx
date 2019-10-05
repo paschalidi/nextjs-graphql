@@ -6,7 +6,7 @@ import { ForgotPasswordComponent } from "../generated/apollocComponents";
 import { withApollo } from "../lib/apollo";
 import Router from "next/router";
 
-export default withApollo(() => {
+const ForgotPassword = () => {
   const [isDisabled, setDisabled] = useState(false);
   return (
     <Layout title="Register Page">
@@ -40,4 +40,6 @@ export default withApollo(() => {
       </ForgotPasswordComponent>
     </Layout>
   );
-});
+};
+
+export default withApollo(ForgotPassword);
