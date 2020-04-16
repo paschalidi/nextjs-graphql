@@ -21,7 +21,7 @@
     "cookie": "^0.4.0",
     "formik": "^1.5.8",
     "graphql-tag": "^2.10.1",
-    "https-proxy-agent": "^2.2.2",
+    "https-proxy-agent": "^2.2.3",
     "isomorphic-unfetch": "^3.0.0",
     "next": "latest",
     "next-routes": "^1.4.2",
